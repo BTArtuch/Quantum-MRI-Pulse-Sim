@@ -1,2 +1,58 @@
-# Quantum-MRI-Pulse-SIm
-A quantum simulation framework using Qiskit to model MRI RF pulse sequences and visualize proton T1 and T2 relaxation dynamics.
+# Quantum NRI Pulse Simulation
+
+### Thermal Equilibrium (Initialization)
+
+In MRI, protons naturally align with the strong external magnetic field ($B_0$), creating a net longitudinal magnetization of $M_z = 1$ (normalized).
+
+In our quantum circuit, this is represented by initializing the qubit in the ground state:
+
+
+$$|\psi_0\rangle = |0\rangle$$
+
+
+At this stage, the expectation value of the Pauli-Z operator (which corresponds to $M_z$) is fully positive:
+
+
+$$\langle Z \rangle = \langle 0 | Z | 0 \rangle = 1$$
+
+### The 180° Inversion Pulse
+
+To invert the magnetization, MRI applies a 180° Radio Frequency (RF) pulse along the x-axis. In Qiskit, this is identical to applying an $R_x(\pi)$ rotation gate. The matrix representation of this gate is:
+
+
+$$R_x(\pi) = \begin{pmatrix} 0 & -i \\ -i & 0 \end{pmatrix}$$
+
+Applying this to our initial state flips the spin (ignoring a global phase factor of $-i$ which has no physical consequence here):
+
+
+$$R_x(\pi) |0\rangle = -i|1\rangle$$
+
+
+Now, the simulated longitudinal magnetization is fully inverted:
+
+
+$$\langle Z \rangle = \langle 1 | Z | 1 \rangle = -1$$
+
+### T1 Relaxation (Delay / Inversion Time)
+
+During the delay period, Inversion Time ($TI$), the RF field is off. The protons exchange energy with their surrounding environment (spin-lattice relaxation) to return to thermal equilibrium.
+
+Classically, this follows the solution to the Bloch equations for longitudinal recovery:
+
+
+$$M_z(TI) = 1 - 2e^{-TI/T_1}$$
+
+In the quantum simulation, unitary gates cannot model this because it is a non-reversible decoherence process. Instead, we model it as an Open Quantum System using an **Amplitude Damping Channel**. The noise model forces the state to probabilistically decay from $|1\rangle$ back to $|0\rangle$ as a function of the delay time $TI$ and the tissue's $T_1$ constant, perfectly mirroring the classical Bloch equation.
+
+### Measurement
+
+Because quantum computers natively measure in the Z-basis (the computational basis), we do not need a 90° readout pulse to tip the spins into the transverse plane. We simply measure the system to find the probability of the qubit being in state $|0\rangle$ ($P(0)$) versus state $|1\rangle$ ($P(1)$).
+
+The macroscopic magnetization $M_z$ at any given $TI$ is mathematically reconstructed from our shot counts:
+
+
+$$\langle Z \rangle = P(0) - P(1)$$
+
+This equation is what generates the discrete points you see plotted in the recovery curve, tracking precisely with the theoretical exponential function.
+
+![T1 Relaxation](image-url)
