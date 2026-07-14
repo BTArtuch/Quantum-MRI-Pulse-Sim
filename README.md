@@ -60,4 +60,4 @@ The macroscopic magnetization $M_z$ at any given $TI$ is mathematically reconstr
 
 This equation is what generates the discrete points you see plotted in the recovery curve, tracking precisely with the theoretical exponential function.
 
-![T1 Relaxation](images/inversion_recovery_T1.png)
+![T1 Relaxation](inversion_recovery_T1.png)
