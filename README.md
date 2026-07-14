@@ -55,4 +55,4 @@ $$\langle Z \rangle = P(0) - P(1)$$
 
 This equation is what generates the discrete points you see plotted in the recovery curve, tracking precisely with the theoretical exponential function.
 
-![T1 Relaxation](image-url)
+![T1 Relaxation](inversion_recovery_T1.pdf)
