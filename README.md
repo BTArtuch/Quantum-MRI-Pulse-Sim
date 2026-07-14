@@ -6,9 +6,9 @@ In MRI, protons naturally align with the strong external magnetic field ($B_0$),
 
 In our quantum circuit, this is represented by initializing the qubit in the ground state:
 
-```math
+\begin{align*}
 |\psi_0\rangle = |0\rangle
-```
+\begin{align*}
 
 At this stage, the expectation value of the Pauli-Z operator (which corresponds to $M_z$) is fully positive:
 
