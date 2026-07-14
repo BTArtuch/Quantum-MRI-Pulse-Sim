@@ -1,4 +1,6 @@
 # Quantum MRI Pulse Simulation
-![Thernmal Equilibrium](Therm_eq.png)
-![Measurement](Meas.png)
-![T1 Relaxation](T1.png)
+<img src="Therm_eq.png" alt="Thermal Equilibrium" width="300">
+
+<img src="Meas.png" alt="Measurement" width="300">
+
+<img src="T1.png" alt="T1 Relaxation" width="600">
