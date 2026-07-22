@@ -7,11 +7,10 @@ format:
     theme: cosmo
   pdf:
     pdf-engine: xelatex
-header-includes:
-  - \usepackage{physics}
-  - \usepackage{amsmath}
-  - \usepackage{braket}
-  # Add any other custom TeX packages you need here
+    header-includes: |
+      \usepackage{physics}
+      \usepackage{amsmath}
+      \usepackage{braket}
 ---
 
 ## Overview
