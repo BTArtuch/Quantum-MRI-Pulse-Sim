@@ -68,7 +68,6 @@ $$\langle Z \rangle = P(0) - P(1)$$
 
 This equation is what generates the discrete points you see plotted in the recovery curve, tracking precisely with the theoretical exponential function.
 
-<center>
 ```
 # Define MRI Tissue Parameters (e.g., White Matter at 1.5T)
 t1_tissue = 600.0  
@@ -103,6 +102,6 @@ for ti in ti_values:
     mz = p0 - p1 
     mz_measurements.append(mz)
 ```
-
-<img src="T1.png" alt="T1 Relaxation" width="1000">
+<center>
+<img src="T1.png" alt="T1 Relaxation" width="800">
 </center>
