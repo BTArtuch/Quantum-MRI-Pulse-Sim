@@ -105,3 +105,44 @@ for ti in ti_values:
 <center>
 <img src="T1.png" alt="T1 Relaxation" width="800">
 </center>
+
+## Mathematical Translation of Transverse ($T_2$) Decay
+
+To simulate $T_2$ spin-spin relaxation, we track how a coherent quantum superposition degrades into a mixed state due to environmental phase adjustments.
+
+### 1. Excitation (The 90° Pulse)
+We begin at thermal equilibrium ($|\psi_0\rangle = |0\rangle$). To measure transverse decay, we must move the magnetization vector into the $XY$ plane. We apply a $90^\circ$ rotation around the Y-axis ($R_y(\pi/2)$):
+
+$$R_y(\pi/2) = \frac{1}{\sqrt{2}} \begin{pmatrix} 1 & -1 \\ 1 & 1 \end{pmatrix}$$
+
+Applying this to our ground state yields an equal superposition state:
+$$|\psi_1\rangle = R_y(\pi/2)|0\rangle = \frac{|0\rangle + |1\rangle}{\sqrt{2}}$$
+
+On the Bloch Sphere, this vector points directly along the positive $X$-axis. The expectation value of the transverse magnetization is at its maximum:
+$$\langle X \rangle = 1, \quad \langle Z \rangle = 0$$
+
+### 2. $T_2$ Dephasing (The Delay Channel)
+During the delay period ($\tau$), the environment causes the spins to lose phase coherence. Mathematically, this is modeled as a **Phase Damping Channel**. 
+
+As time progresses, the off-diagonal elements of the system's density matrix $\rho$ decay exponentially at a rate governed by $T_2$:
+$$\rho(\tau) = \frac{1}{2} \begin{pmatrix} 1 & e^{-\tau/T_2} \\ e^{-\tau/T_2} & 1 \end{pmatrix}$$
+
+As $\tau \rightarrow \infty$, the off-diagonal terms vanish completely, leaving a completely mixed state ($\rho = \frac{1}{2}I$). The spins are completely out of phase, meaning net transverse magnetization $M_{xy}$ has dropped to 0.
+
+### 3. The Transverse Readout Gate
+Because a quantum computer can only collapse and measure states along the longitudinal $Z$-axis, we cannot read $\langle X \rangle$ directly. 
+
+To map the remaining $X$-axis coherence back into measurable $Z$-axis population differences, we apply a reverse rotation gate, $R_y(-\pi/2)$, just before measurement:
+
+* **If no decay occurred ($\tau = 0$):** 
+  $$R_y(-\pi/2) \left( \frac{|0\rangle + |1\rangle}{\sqrt{2}} \right) = |0\rangle \implies \langle Z \rangle = 1$$
+* **If total dephasing occurred ($\tau = \infty$):** 
+  The state is a completely mixed identity matrix $\frac{1}{2}I$. Applying any unitary rotation to an identity matrix leaves it unchanged. Measuring it results in a strict 50/50 split of $|0\rangle$ and $|1\rangle$:
+  $$\langle Z \rangle = 0.5 - 0.5 = 0$$
+
+Thus, by tracking $\langle Z \rangle$ after the reverse rotation, we perfectly reconstruct the classical transverse decay curve described by the Bloch equation:
+$$M_{xy}(\tau) = M_0 e^{-\tau/T_2}$$
+
+<center>
+<img src="T2.png" alt="T2 Decay" width="800">
+</center>
