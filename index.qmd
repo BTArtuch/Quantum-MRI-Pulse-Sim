@@ -1,1 +1,24 @@
+---
+title: "Quantum MRI Pulse Simulation"
+author: "BTArtuch"
+format:
+  html:
+    toc: true
+    theme: cosmo
+  pdf:
+    pdf-engine: xelatex
+header-includes:
+  - \usepackage{physics}
+  - \usepackage{amsmath}
+  - \usepackage{braket}
+  # Add any other custom TeX packages you need here
+---
 
+## Overview
+Write your portfolio text here using standard Markdown and inline TeX.
+
+![Measurement Result](Meas.png)
+
+$$
+\hat{H} = \hbar \omega_0 \hat{S}_z + \hbar \Omega \cos(\omega t) \hat{S}_x
+$$
